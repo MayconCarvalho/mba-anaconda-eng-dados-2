@@ -1,0 +1,15 @@
+services:
+  anaconda:
+    image: mba-anaconda-eng-dados-2:1.0
+    container_name: mba-anaconda-eng-dados-2
+    build: 
+      context: .
+      dockerfile: Dockerfile
+    ports:
+      - "8888:8888"
+    volumes:
+      - ./src:/app
+  
+volumes:
+  mba-anaconda-eng-dados-2:
+    driver: local
