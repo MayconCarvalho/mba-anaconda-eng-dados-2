@@ -1,7 +1,21 @@
 services:
+  mysql-database:
+    image: mysql:8.0.37
+    container_name: mysql-mba-eng-dados-2
+    environment:
+      MYSQL_ROOT_PASSWORD: root
+      MYSQL_DATABASE: sakila
+    ports:
+      - "3306:3306"
+    volumes:
+      - mba-anaconda-eng-dados-2:/var/lib/mysql
+      - ./src/resources/:/docker-entrypoint-initdb.d/
+
   anaconda:
     image: mba-anaconda-eng-dados-2:1.0
     container_name: mba-anaconda-eng-dados-2
+    depends_on:
+      - mysql-database
     build: 
       context: .
       dockerfile: Dockerfile
